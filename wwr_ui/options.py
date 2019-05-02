@@ -170,6 +170,66 @@ OPTIONS = OrderedDict([
     "starting_gear",
     "Items that will be in Link's inventory at the start of a new game."
   ),
+  ( 
+    "glitches_ledge_clips",
+    "Using objects (bombs, statues, pots, etc) to clip yourself into the wall when grabbing a ledge."
+  ),
+  (
+    "glitches_roll_clips",
+    "Grabbing a ledge with Link's hand in the wall, and rolling on the first frame possible to clip into walls."
+  ),
+  (
+    "glitches_door_storage",
+    "Storing a door to either unload it or be in the previous room when it unloads to get out of bounds."
+  ),
+  (
+    "glitches_leaf_pumps",
+    "Putting away the leaf and pulling it back out immediately to maintain height better when flying."
+  ),
+  (
+    "glitches_spring_jump_storage",
+    "Pushing down a spring, using a first person item to get it out of view and unloading it (hookshot), force-unequiping the iron boots, and hookshotting yourself to a target to keep the spring unloaded. Then when you want to use the spring jump, turn the camera back towards the spring to load it back in."
+  ),
+  (
+    "glitches_Lslide",
+    "When you start firing the hookshot, hold target and a direction on the control stick. You will move around while the hookshot is firing. Sometimes this is paired with a bomb explosion to clip out of bounds."
+  ),
+  (
+    "glitches_bomb_boost",
+    "Using the knockback from an exploding bomb to give yourself extra distance/height from a jump."
+  ),
+  (
+    "glitches_weapons_thru_rooms",
+    "Throwing enemy's weapons so that they bounce through doors while you're opening them."
+  ),
+  (
+    "glitches_wwdives",
+    "Pulling out the Wind Waker at ledges in order to dive deep under the ocean."
+  ),
+  (
+    "glitches_ww_wind_cancel",
+    "Pulling the Wind Waker to repeatedly cancel the effect of blowing wind to slowly move through it."
+  ),
+  (
+    "glitches_sidle_clips",
+    "Sidling against certain objects allowing you to clip through them, like the song stone in the Wind Temple basement."
+  ),
+  (
+    "glitches_door_cancel",
+    "Cancelling a door opening animation with stored boat text on the overworld to get a very small hitbox (and blinding yourself, pause-unpause to briefly see where you are)."
+  ),
+  (
+    "glitches_korl_cyclones",
+    "Jumping out of the boat into a cyclone to quickly gain height with the leaf."
+  ),
+  (
+    "glitchComboBox",
+    "Select items from this box to add them to the list below. All tricks in the list will be available for the logic to consider."
+  ),
+  (
+    "glitchList",
+    "Tricks in this list are available for logic take into account when randomizing."
+  ),
 ])
 
 NON_PERMALINK_OPTIONS = [
@@ -177,4 +237,5 @@ NON_PERMALINK_OPTIONS = [
   "custom_player_model",
   "player_in_casual_clothes",
   "disable_custom_player_voice",
+  "glitchComboBox",
 ]

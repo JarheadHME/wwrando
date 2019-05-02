@@ -7,6 +7,7 @@ from wwr_ui.options import OPTIONS, NON_PERMALINK_OPTIONS
 from wwr_ui.update_checker import check_for_updates, LATEST_RELEASE_DOWNLOAD_PAGE_URL
 from wwr_ui.inventory import INVENTORY_ITEMS, REGULAR_ITEMS, PROGRESSIVE_ITEMS
 from wwr_ui.packedbits import PackedBitsReader, PackedBitsWriter
+from wwr_ui.tricks import SINGLE_TRICKS
 
 import random
 import collections
@@ -59,6 +60,9 @@ class WWRandomizerWindow(QMainWindow):
     self.starting_gear_model = QStringListModel()
     self.ui.starting_gear.setModel(self.starting_gear_model)
 
+    self.glitchList_model = QStringListModel()
+    self.ui.glitchList.setModel(self.glitchList_model)
+
     self.preserve_default_settings()
     
     self.cached_item_locations = Logic.load_and_parse_item_locations()
@@ -74,6 +78,12 @@ class WWRandomizerWindow(QMainWindow):
     
     self.ui.custom_player_model.currentIndexChanged.connect(self.custom_model_changed)
     self.ui.player_in_casual_clothes.clicked.connect(self.custom_model_changed)
+
+    self.ui.glitchComboBox.currentIndexChanged.connect(self.add_trick_to_list)
+    self.ui.glitchRemoveTrick.clicked.connect(self.remove_trick_from_list)
+    self.ui.glitchClearList.clicked.connect(self.clear_trick_list)
+
+
     
     for option_name in OPTIONS:
       widget = getattr(self.ui, option_name)
@@ -86,6 +96,8 @@ class WWRandomizerWindow(QMainWindow):
       else:
         raise Exception("Option widget is invalid: %s" % option_name)
     
+    self.add_tricks_to_selection_box()
+
     self.ui.generate_seed_button.clicked.connect(self.generate_seed)
     
     self.ui.randomize_button.clicked.connect(self.randomize)
@@ -114,6 +126,8 @@ class WWRandomizerWindow(QMainWindow):
     self.update_checker_thread = UpdateCheckerThread()
     self.update_checker_thread.finished_checking_for_updates.connect(self.show_update_check_results)
     self.update_checker_thread.start()
+
+
   
   def generate_seed(self):
     random.seed(None)
@@ -256,7 +270,9 @@ class WWRandomizerWindow(QMainWindow):
     self.progress_dialog.reset()
     
     text = """Randomization complete.<br><br>
-      If you get stuck, check the progression spoiler log in the output folder."""
+      If you get stuck, check the progression spoiler log in the output folder.<br><br>
+      Refer to this playlist for all glitches that are in logic:<br>
+      <a href=\"https://www.youtube.com/playlist?list=PLmBfgSBleztQ7eQO75k8-p0cOOcwqqYwN\">https://www.youtube.com/playlist?list=PLmBfgSBleztQ7eQO75k8-p0cOOcwqqYwN</a>"""
     
     self.complete_dialog = QMessageBox()
     self.complete_dialog.setTextFormat(Qt.TextFormat.RichText)
@@ -305,6 +321,10 @@ class WWRandomizerWindow(QMainWindow):
           any_setting_changed = True
         self.set_option_value(option_name, default_value)
     
+    self.reset_trick_list() 
+    # Special case because the available ComboBox options don't get stored in the default settings, so manually reset them here
+    # This is because the part that gets saved is the selected item, but the part we care about is the list of available options
+
     any_color_changed = self.reset_color_selectors_to_model_default_colors()
     if any_color_changed:
       any_setting_changed = True
@@ -434,6 +454,10 @@ class WWRandomizerWindow(QMainWindow):
           # No Progressive Sword and there's no more than
           # 3 of any other Progressive item so two bits per item
           bitswriter.write(value.count(item), 2)
+      elif widget == self.ui.glitchList:
+      	for i in range(len(SINGLE_TRICKS)):
+      		bit = SINGLE_TRICKS[i] in value
+      		bitswriter.write(bit, 1)
 
     bitswriter.flush()
     
@@ -497,6 +521,16 @@ class WWRandomizerWindow(QMainWindow):
             self.append_row(self.starting_gear_model, item)
           for i in range(randamount):
             self.append_row(self.randomized_gear_model, item)
+      elif widget == self.ui.glitchList:
+        self.clear_trick_list_box()
+        self.clear_trick_selection_box()
+        for i in range(len(SINGLE_TRICKS)):
+          bit = bitsreader.read(1)
+          if bit == 1:
+            self.append_row(self.ui.glitchList.model(), SINGLE_TRICKS[i])
+        self.add_tricks_to_selection_box()
+
+
 
     self.update_settings()
   
@@ -795,6 +829,51 @@ class WWRandomizerWindow(QMainWindow):
         widget.setEnabled(False)
         widget.setChecked(False)
   
+
+  def add_tricks_to_selection_box(self):
+    existingTricks = self.get_option_value("glitchList")
+    model = self.ui.glitchList.model()
+    for trick in SINGLE_TRICKS:
+      if trick not in existingTricks:
+        self.ui.glitchComboBox.addItem(trick)
+    self.ui.glitchComboBox.model().sort(0)
+
+  def clear_trick_selection_box(self):
+    for i in range(len(SINGLE_TRICKS), 0, -1): # Clear in reverse order to ensure no weird shenanigans with duplicating items happens when doing it forwards
+      if i == 0: # The 0th item in the ComboBox is the blank slot which is generall kept as the active slot for searching purposes
+      	continue
+      self.ui.glitchComboBox.removeItem(i)
+
+  def add_trick_to_list(self):
+    if str(self.ui.glitchComboBox.currentText()) in SINGLE_TRICKS:
+      self.append_row(self.ui.glitchList.model(), self.ui.glitchComboBox.currentText())
+      self.ui.glitchList.model().sort(Qt.AscendingOrder)
+      index = self.ui.glitchComboBox.currentIndex()
+      self.ui.glitchComboBox.setCurrentIndex(0)
+      self.ui.glitchComboBox.removeItem(index)
+
+  def remove_trick_from_list(self):
+    selection = self.ui.glitchList.selectionModel().selectedIndexes()
+    for item in selection:
+      self.ui.glitchComboBox.addItem(item.data())
+      self.ui.glitchList.model().removeRow(item.row())
+    self.ui.glitchComboBox.model().sort(0)
+    self.update_settings()
+
+  def clear_trick_list_box(self): # For a cleaner reset_trick_list func
+  	self.ui.glitchList.model().removeRows(0, self.ui.glitchList.model().rowCount())
+
+  def clear_trick_list(self): # Reset list to default state then trigger a settings and permalink update
+    self.reset_trick_list()
+    self.update_settings()
+
+  def reset_trick_list(self): # Reset the list to default state, mainly seperate from above to avoid rerunning update_settings()
+    self.clear_trick_list_box()
+    self.clear_trick_selection_box()
+    self.add_tricks_to_selection_box()
+    self.ui.glitchComboBox.model().sort(0)
+
+
   def disable_invalid_cosmetic_options(self):
     custom_model_name = self.get_option_value("custom_player_model")
     metadata = customizer.get_model_metadata(custom_model_name)
