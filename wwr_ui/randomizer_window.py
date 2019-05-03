@@ -839,9 +839,7 @@ class WWRandomizerWindow(QMainWindow):
     self.ui.glitchComboBox.model().sort(0)
 
   def clear_trick_selection_box(self):
-    for i in range(len(SINGLE_TRICKS), 0, -1): # Clear in reverse order to ensure no weird shenanigans with duplicating items happens when doing it forwards
-      if i == 0: # The 0th item in the ComboBox is the blank slot which is generall kept as the active slot for searching purposes
-      	continue
+    for i in range(len(SINGLE_TRICKS), 1, -1): # Clear in reverse order to ensure no weird shenanigans with duplicating items happens when doing it forwards
       self.ui.glitchComboBox.removeItem(i)
 
   def add_trick_to_list(self):
@@ -854,7 +852,7 @@ class WWRandomizerWindow(QMainWindow):
 
   def remove_trick_from_list(self):
     selection = self.ui.glitchList.selectionModel().selectedIndexes()
-    for item in selection:
+    for item in reversed(selection):
       self.ui.glitchComboBox.addItem(item.data())
       self.ui.glitchList.model().removeRow(item.row())
     self.ui.glitchComboBox.model().sort(0)

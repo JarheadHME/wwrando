@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'randomizer_window.ui',
 # licensing of 'randomizer_window.ui' applies.
 #
-# Created: Fri Apr 26 00:24:16 2019
+# Created: Fri May  3 00:01:42 2019
 #      by: pyside2-uic  running on PySide2 5.12.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -368,7 +368,8 @@ class Ui_MainWindow(object):
         self.glitchComboBox.setEditable(True)
         self.glitchComboBox.setCurrentText("")
         self.glitchComboBox.setMaxVisibleItems(10)
-        self.glitchComboBox.setInsertPolicy(QtWidgets.QComboBox.InsertAlphabetically)
+        self.glitchComboBox.setInsertPolicy(QtWidgets.QComboBox.NoInsert)
+        self.glitchComboBox.setDuplicatesEnabled(False)
         self.glitchComboBox.setFrame(True)
         self.glitchComboBox.setObjectName("glitchComboBox")
         self.glitchComboBox.addItem("")
@@ -466,7 +467,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -556,7 +557,7 @@ class Ui_MainWindow(object):
         self.glitches_roll_clips.setText(QtWidgets.QApplication.translate("MainWindow", "Roll Clips", None, -1))
         self.glitches_korl_cyclones.setText(QtWidgets.QApplication.translate("MainWindow", "Jumping Into Cyclones \n"
 "From Boat", None, -1))
-        self.groupBox_4.setTitle(QtWidgets.QApplication.translate("MainWindow", "Isloated Glitches/Tricks", None, -1))
+        self.groupBox_4.setTitle(QtWidgets.QApplication.translate("MainWindow", "Isolated Glitches/Tricks", None, -1))
         self.glitchRemoveTrick.setText(QtWidgets.QApplication.translate("MainWindow", "Remove", None, -1))
         self.glitchClearList.setText(QtWidgets.QApplication.translate("MainWindow", "Clear", None, -1))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QtWidgets.QApplication.translate("MainWindow", "Glitches", None, -1))

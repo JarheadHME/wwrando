@@ -75,7 +75,7 @@
            <bool>true</bool>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="tab">
            <attribute name="title">
@@ -835,7 +835,7 @@ From Boat</string>
              </rect>
             </property>
             <property name="title">
-             <string>Isloated Glitches/Tricks</string>
+             <string>Isolated Glitches/Tricks</string>
             </property>
             <widget class="QComboBox" name="glitchComboBox">
              <property name="geometry">
@@ -859,7 +859,10 @@ From Boat</string>
               <number>10</number>
              </property>
              <property name="insertPolicy">
-              <enum>QComboBox::InsertAlphabetically</enum>
+              <enum>QComboBox::NoInsert</enum>
+             </property>
+             <property name="duplicatesEnabled">
+              <bool>false</bool>
              </property>
              <property name="frame">
               <bool>true</bool>
