@@ -625,6 +625,46 @@ Can Sword Fight with Orca:
   | In Swordless Mode
   # Swordless gives you a sword temporarily while in Orca's house, so you don't need to have found a sword item.
 
+# Glitches
+Can Ledge Clip:
+  Option "glitches_ledge_clips" Enabled
+Can Roll Clip:
+  Option "glitches_roll_clips" Enabled
+Can Store Doors:
+  Option "glitches_door_storage" Enabled
+Can Leaf Pump:
+  Option "glitches_leaf_pumps" Enabled
+Can Store Springs:
+  Option "glitches_spring_jump_storage" Enabled
+Can L-Slide Clip:
+  Option "glitches_Lslide" Enabled
+Can Bomb Boost:
+  Option "glitches_bomb_boost" Enabled
+Can Take Enemy Weapons Through Doors:
+  Option "glitches_weapons_thru_rooms" Enabled
+Can Wind Waker Dive:
+  Option "glitches_wwdives" Enabled
+Can Cancel Wind With Wind Waker:
+  Option "glitches_ww_wind_cancel" Enabled
+Can Sidle Clip:
+  Option "glitches_sidle_clips" Enabled
+Can Door Cancel:
+  Option "glitches_door_cancel" Enabled
+Can Ride Cyclones From Boat:
+  Option "glitches_korl_cyclones" Enabled
+
+# Single Tricks
+Can Do Flight Control Platform Cheese:
+  Option "glitchList" Contains "Flight Control Platform Flying Skip"
+Can Do Savage Labyrinth Floor Skips:
+  Option "glitchList" Contains "Savage Labyrinth Floor Skips"
+Can Do Birds Peak Rock Grapple Clip:
+  Option "glitchList" Contains "Birds Peak Rock Grapple Clip"
+Can Get Captured by FF Floormaster:
+  Option "glitchList" Contains "Getting Captured By Forsaken Fortress Floormaster"
+Can Manipulate Medli Without Command Melody:
+  Option "glitchList" Contains "Smart Positioning of Medli in Earth Temple"
+
 # The below macros are used when charts are not randomized.
 # When charts are randomized, these macros are shuffled around by the randomizer logic.
 Chart for Island 1: Treasure Chart 25
