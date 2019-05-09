@@ -837,7 +837,7 @@ From Boat</string>
             <property name="title">
              <string>Isolated Glitches/Tricks</string>
             </property>
-            <widget class="QComboBox" name="glitchComboBox">
+            <widget class="QComboBox" name="glitch_selection_box">
              <property name="geometry">
               <rect>
                <x>140</x>
@@ -873,7 +873,7 @@ From Boat</string>
               </property>
              </item>
             </widget>
-            <widget class="QListView" name="glitchList">
+            <widget class="QListView" name="glitch_list">
              <property name="geometry">
               <rect>
                <x>140</x>
@@ -889,7 +889,7 @@ From Boat</string>
               <enum>QAbstractItemView::ExtendedSelection</enum>
              </property>
             </widget>
-            <widget class="QPushButton" name="glitchRemoveTrick">
+            <widget class="QPushButton" name="glitch_remove">
              <property name="geometry">
               <rect>
                <x>280</x>
@@ -902,7 +902,7 @@ From Boat</string>
               <string>Remove</string>
              </property>
             </widget>
-            <widget class="QPushButton" name="glitchClearList">
+            <widget class="QPushButton" name="glitch_clear">
              <property name="geometry">
               <rect>
                <x>380</x>

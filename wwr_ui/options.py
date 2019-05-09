@@ -223,11 +223,11 @@ OPTIONS = OrderedDict([
     "Jumping out of the boat into a cyclone to quickly gain height with the leaf."
   ),
   (
-    "glitchComboBox",
+    "glitch_selection_box",
     "Select items from this box to add them to the list below. All tricks in the list will be available for the logic to consider."
   ),
   (
-    "glitchList",
+    "glitch_list",
     "Tricks in this list are available for logic take into account when randomizing."
   ),
 ])
@@ -237,5 +237,5 @@ NON_PERMALINK_OPTIONS = [
   "custom_player_model",
   "player_in_casual_clothes",
   "disable_custom_player_voice",
-  "glitchComboBox",
+  "glitch_selection_box",
 ]

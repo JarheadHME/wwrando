@@ -60,8 +60,8 @@ class WWRandomizerWindow(QMainWindow):
     self.starting_gear_model = QStringListModel()
     self.ui.starting_gear.setModel(self.starting_gear_model)
 
-    self.glitchList_model = QStringListModel()
-    self.ui.glitchList.setModel(self.glitchList_model)
+    self.glitch_list_model = QStringListModel()
+    self.ui.glitch_list.setModel(self.glitch_list_model)
 
     self.preserve_default_settings()
     
@@ -79,9 +79,9 @@ class WWRandomizerWindow(QMainWindow):
     self.ui.custom_player_model.currentIndexChanged.connect(self.custom_model_changed)
     self.ui.player_in_casual_clothes.clicked.connect(self.custom_model_changed)
 
-    self.ui.glitchComboBox.currentIndexChanged.connect(self.add_trick_to_list)
-    self.ui.glitchRemoveTrick.clicked.connect(self.remove_trick_from_list)
-    self.ui.glitchClearList.clicked.connect(self.clear_trick_list)
+    self.ui.glitch_selection_box.currentIndexChanged.connect(self.add_trick_to_list)
+    self.ui.glitch_remove.clicked.connect(self.remove_trick_from_list)
+    self.ui.glitch_clear.clicked.connect(self.clear_trick_list)
 
 
     
@@ -454,7 +454,7 @@ class WWRandomizerWindow(QMainWindow):
           # No Progressive Sword and there's no more than
           # 3 of any other Progressive item so two bits per item
           bitswriter.write(value.count(item), 2)
-      elif widget == self.ui.glitchList:
+      elif widget == self.ui.glitch_list:
       	for i in range(len(SINGLE_TRICKS)):
       		bit = SINGLE_TRICKS[i] in value
       		bitswriter.write(bit, 1)
@@ -521,13 +521,13 @@ class WWRandomizerWindow(QMainWindow):
             self.append_row(self.starting_gear_model, item)
           for i in range(randamount):
             self.append_row(self.randomized_gear_model, item)
-      elif widget == self.ui.glitchList:
+      elif widget == self.ui.glitch_list:
         self.clear_trick_list_box()
         self.clear_trick_selection_box()
         for i in range(len(SINGLE_TRICKS)):
           bit = bitsreader.read(1)
           if bit == 1:
-            self.append_row(self.ui.glitchList.model(), SINGLE_TRICKS[i])
+            self.append_row(self.ui.glitch_list.model(), SINGLE_TRICKS[i])
         self.add_tricks_to_selection_box()
 
 
@@ -831,35 +831,35 @@ class WWRandomizerWindow(QMainWindow):
   
 
   def add_tricks_to_selection_box(self):
-    existingTricks = self.get_option_value("glitchList")
-    model = self.ui.glitchList.model()
+    existingTricks = self.get_option_value("glitch_list")
+    model = self.ui.glitch_list.model()
     for trick in SINGLE_TRICKS:
       if trick not in existingTricks:
-        self.ui.glitchComboBox.addItem(trick)
-    self.ui.glitchComboBox.model().sort(0)
+        self.ui.glitch_selection_box.addItem(trick)
+    self.ui.glitch_selection_box.model().sort(0)
 
   def clear_trick_selection_box(self):
-    for i in range(self.ui.glitchComboBox.count(), 0, -1): # Clear in reverse order to ensure no weird shenanigans with duplicating items happens when doing it forwards
-      self.ui.glitchComboBox.removeItem(i)
+    for i in range(self.ui.glitch_selection_box.count(), 0, -1): # Clear in reverse order to ensure no weird shenanigans with duplicating items happens when doing it forwards
+      self.ui.glitch_selection_box.removeItem(i)
 
   def add_trick_to_list(self):
-    if str(self.ui.glitchComboBox.currentText()) in SINGLE_TRICKS:
-      self.append_row(self.ui.glitchList.model(), self.ui.glitchComboBox.currentText())
-      self.ui.glitchList.model().sort(Qt.AscendingOrder)
-      index = self.ui.glitchComboBox.currentIndex()
-      self.ui.glitchComboBox.setCurrentIndex(0)
-      self.ui.glitchComboBox.removeItem(index)
+    if str(self.ui.glitch_selection_box.currentText()) in SINGLE_TRICKS:
+      self.append_row(self.ui.glitch_list.model(), self.ui.glitch_selection_box.currentText())
+      self.ui.glitch_list.model().sort(Qt.AscendingOrder)
+      index = self.ui.glitch_selection_box.currentIndex()
+      self.ui.glitch_selection_box.setCurrentIndex(0)
+      self.ui.glitch_selection_box.removeItem(index)
 
   def remove_trick_from_list(self):
-    selection = self.ui.glitchList.selectionModel().selectedIndexes()
+    selection = self.ui.glitch_list.selectionModel().selectedIndexes()
     for item in reversed(selection):
-      self.ui.glitchComboBox.addItem(item.data())
-      self.ui.glitchList.model().removeRow(item.row())
-    self.ui.glitchComboBox.model().sort(0)
+      self.ui.glitch_selection_box.addItem(item.data())
+      self.ui.glitch_list.model().removeRow(item.row())
+    self.ui.glitch_selection_box.model().sort(0)
     self.update_settings()
 
   def clear_trick_list_box(self): # For a cleaner reset_trick_list func
-  	self.ui.glitchList.model().removeRows(0, self.ui.glitchList.model().rowCount())
+  	self.ui.glitch_list.model().removeRows(0, self.ui.glitch_list.model().rowCount())
 
   def clear_trick_list(self): # Reset list to default state then trigger a settings and permalink update
     self.reset_trick_list()
@@ -869,7 +869,7 @@ class WWRandomizerWindow(QMainWindow):
     self.clear_trick_list_box()
     self.clear_trick_selection_box()
     self.add_tricks_to_selection_box()
-    self.ui.glitchComboBox.model().sort(0)
+    self.ui.glitch_selection_box.model().sort(0)
 
 
   def disable_invalid_cosmetic_options(self):
