@@ -655,15 +655,15 @@ Can Ride Cyclones From Boat:
 
 # Single Tricks
 Can Do Flight Control Platform Cheese:
-  Option "glitchList" Contains "Flight Control Platform Flying Skip"
+  Option "glitch_list" Contains "Flight Control Platform Flying Skip"
 Can Do Savage Labyrinth Floor Skips:
-  Option "glitchList" Contains "Savage Labyrinth Floor Skips"
+  Option "glitch_list" Contains "Savage Labyrinth Floor Skips"
 Can Do Birds Peak Rock Grapple Clip:
-  Option "glitchList" Contains "Birds Peak Rock Grapple Clip"
+  Option "glitch_list" Contains "Birds Peak Rock Grapple Clip"
 Can Get Captured by FF Floormaster:
-  Option "glitchList" Contains "Getting Captured By Forsaken Fortress Floormaster"
+  Option "glitch_list" Contains "Getting Captured By Forsaken Fortress Floormaster"
 Can Manipulate Medli Without Command Melody:
-  Option "glitchList" Contains "Smart Positioning of Medli in Earth Temple"
+  Option "glitch_list" Contains "Smart Positioning of Medli in Earth Temple"
 
 # The below macros are used when charts are not randomized.
 # When charts are randomized, these macros are shuffled around by the randomizer logic.
