@@ -853,6 +853,7 @@ class WWRandomizerWindow(QMainWindow):
 
   def add_all_tricks_to_list(self):
     self.clear_trick_selection_box()
+    self.clear_trick_list_box()
     for trick in SINGLE_TRICKS:
       self.append_row(self.ui.glitch_list.model(), trick)
     self.ui.glitch_list.model().sort(Qt.AscendingOrder)
@@ -866,7 +867,7 @@ class WWRandomizerWindow(QMainWindow):
     self.ui.glitch_selection_box.model().sort(0)
     self.update_settings()
 
-  def clear_trick_list_box(self): # For a cleaner reset_trick_list func
+  def clear_trick_list_box(self):
   	self.ui.glitch_list.model().removeRows(0, self.ui.glitch_list.model().rowCount())
 
   def clear_trick_list(self): # Reset list to default state then trigger a settings and permalink update
