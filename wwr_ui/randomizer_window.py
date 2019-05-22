@@ -79,7 +79,8 @@ class WWRandomizerWindow(QMainWindow):
     self.ui.custom_player_model.currentIndexChanged.connect(self.custom_model_changed)
     self.ui.player_in_casual_clothes.clicked.connect(self.custom_model_changed)
 
-    self.ui.glitch_selection_box.currentIndexChanged.connect(self.add_trick_to_list)
+    self.ui.glitch_add.clicked.connect(self.add_trick_to_list)
+    self.ui.glitch_add_all.clicked.connect(self.add_all_tricks_to_list)
     self.ui.glitch_remove.clicked.connect(self.remove_trick_from_list)
     self.ui.glitch_clear.clicked.connect(self.clear_trick_list)
 
@@ -849,6 +850,13 @@ class WWRandomizerWindow(QMainWindow):
       index = self.ui.glitch_selection_box.currentIndex()
       self.ui.glitch_selection_box.setCurrentIndex(0)
       self.ui.glitch_selection_box.removeItem(index)
+
+  def add_all_tricks_to_list(self):
+    self.clear_trick_selection_box()
+    for trick in SINGLE_TRICKS:
+      self.append_row(self.ui.glitch_list.model(), trick)
+    self.ui.glitch_list.model().sort(Qt.AscendingOrder)
+    self.update_settings()
 
   def remove_trick_from_list(self):
     selection = self.ui.glitch_list.selectionModel().selectedIndexes()

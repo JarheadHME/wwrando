@@ -75,7 +75,7 @@
            <bool>true</bool>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="tab">
            <attribute name="title">
@@ -699,7 +699,7 @@
               <x>50</x>
               <y>30</y>
               <width>741</width>
-              <height>271</height>
+              <height>251</height>
              </rect>
             </property>
             <property name="autoFillBackground">
@@ -714,7 +714,7 @@
                <x>20</x>
                <y>10</y>
                <width>701</width>
-               <height>251</height>
+               <height>231</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_8">
@@ -829,9 +829,9 @@ From Boat</string>
             <property name="geometry">
              <rect>
               <x>50</x>
-              <y>320</y>
+              <y>290</y>
               <width>741</width>
-              <height>291</height>
+              <height>321</height>
              </rect>
             </property>
             <property name="title">
@@ -877,7 +877,7 @@ From Boat</string>
              <property name="geometry">
               <rect>
                <x>140</x>
-               <y>50</y>
+               <y>80</y>
                <width>461</width>
                <height>201</height>
               </rect>
@@ -892,8 +892,8 @@ From Boat</string>
             <widget class="QPushButton" name="glitch_remove">
              <property name="geometry">
               <rect>
-               <x>280</x>
-               <y>260</y>
+               <x>270</x>
+               <y>290</y>
                <width>75</width>
                <height>23</height>
               </rect>
@@ -905,14 +905,40 @@ From Boat</string>
             <widget class="QPushButton" name="glitch_clear">
              <property name="geometry">
               <rect>
-               <x>380</x>
-               <y>260</y>
+               <x>390</x>
+               <y>290</y>
                <width>75</width>
                <height>23</height>
               </rect>
              </property>
              <property name="text">
               <string>Clear</string>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="glitch_add">
+             <property name="geometry">
+              <rect>
+               <x>270</x>
+               <y>50</y>
+               <width>75</width>
+               <height>23</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Add</string>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="glitch_add_all">
+             <property name="geometry">
+              <rect>
+               <x>390</x>
+               <y>50</y>
+               <width>75</width>
+               <height>23</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Add All</string>
              </property>
             </widget>
            </widget>

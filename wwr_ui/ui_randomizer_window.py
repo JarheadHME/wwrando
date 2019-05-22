@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'randomizer_window.ui',
 # licensing of 'randomizer_window.ui' applies.
 #
-# Created: Thu May  9 15:36:05 2019
+# Created: Wed May 22 02:26:19 2019
 #      by: pyside2-uic  running on PySide2 5.12.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -307,11 +307,11 @@ class Ui_MainWindow(object):
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
         self.groupBox1 = QtWidgets.QGroupBox(self.tab_4)
-        self.groupBox1.setGeometry(QtCore.QRect(50, 30, 741, 271))
+        self.groupBox1.setGeometry(QtCore.QRect(50, 30, 741, 251))
         self.groupBox1.setAutoFillBackground(False)
         self.groupBox1.setObjectName("groupBox1")
         self.layoutWidget = QtWidgets.QWidget(self.groupBox1)
-        self.layoutWidget.setGeometry(QtCore.QRect(20, 10, 701, 251))
+        self.layoutWidget.setGeometry(QtCore.QRect(20, 10, 701, 231))
         self.layoutWidget.setObjectName("layoutWidget")
         self.gridLayout_8 = QtWidgets.QGridLayout(self.layoutWidget)
         self.gridLayout_8.setContentsMargins(0, 0, 0, 0)
@@ -360,7 +360,7 @@ class Ui_MainWindow(object):
         self.glitches_korl_cyclones.setObjectName("glitches_korl_cyclones")
         self.gridLayout_8.addWidget(self.glitches_korl_cyclones, 3, 0, 1, 1)
         self.groupBox_4 = QtWidgets.QGroupBox(self.tab_4)
-        self.groupBox_4.setGeometry(QtCore.QRect(50, 320, 741, 291))
+        self.groupBox_4.setGeometry(QtCore.QRect(50, 290, 741, 321))
         self.groupBox_4.setObjectName("groupBox_4")
         self.glitch_selection_box = QtWidgets.QComboBox(self.groupBox_4)
         self.glitch_selection_box.setGeometry(QtCore.QRect(140, 20, 461, 21))
@@ -375,16 +375,22 @@ class Ui_MainWindow(object):
         self.glitch_selection_box.addItem("")
         self.glitch_selection_box.setItemText(0, "")
         self.glitch_list = QtWidgets.QListView(self.groupBox_4)
-        self.glitch_list.setGeometry(QtCore.QRect(140, 50, 461, 201))
+        self.glitch_list.setGeometry(QtCore.QRect(140, 80, 461, 201))
         self.glitch_list.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.glitch_list.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.glitch_list.setObjectName("glitch_list")
         self.glitch_remove = QtWidgets.QPushButton(self.groupBox_4)
-        self.glitch_remove.setGeometry(QtCore.QRect(280, 260, 75, 23))
+        self.glitch_remove.setGeometry(QtCore.QRect(270, 290, 75, 23))
         self.glitch_remove.setObjectName("glitch_remove")
         self.glitch_clear = QtWidgets.QPushButton(self.groupBox_4)
-        self.glitch_clear.setGeometry(QtCore.QRect(380, 260, 75, 23))
+        self.glitch_clear.setGeometry(QtCore.QRect(390, 290, 75, 23))
         self.glitch_clear.setObjectName("glitch_clear")
+        self.glitch_add = QtWidgets.QPushButton(self.groupBox_4)
+        self.glitch_add.setGeometry(QtCore.QRect(270, 50, 75, 23))
+        self.glitch_add.setObjectName("glitch_add")
+        self.glitch_add_all = QtWidgets.QPushButton(self.groupBox_4)
+        self.glitch_add_all.setGeometry(QtCore.QRect(390, 50, 75, 23))
+        self.glitch_add_all.setObjectName("glitch_add_all")
         self.tabWidget.addTab(self.tab_4, "")
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("tab_2")
@@ -467,7 +473,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -560,6 +566,8 @@ class Ui_MainWindow(object):
         self.groupBox_4.setTitle(QtWidgets.QApplication.translate("MainWindow", "Isolated Glitches/Tricks", None, -1))
         self.glitch_remove.setText(QtWidgets.QApplication.translate("MainWindow", "Remove", None, -1))
         self.glitch_clear.setText(QtWidgets.QApplication.translate("MainWindow", "Clear", None, -1))
+        self.glitch_add.setText(QtWidgets.QApplication.translate("MainWindow", "Add", None, -1))
+        self.glitch_add_all.setText(QtWidgets.QApplication.translate("MainWindow", "Add All", None, -1))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QtWidgets.QApplication.translate("MainWindow", "Glitches", None, -1))
         self.label_for_custom_player_model.setText(QtWidgets.QApplication.translate("MainWindow", "Player Model", None, -1))
         self.player_in_casual_clothes.setText(QtWidgets.QApplication.translate("MainWindow", "Casual Clothes", None, -1))
