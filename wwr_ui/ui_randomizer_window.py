@@ -3,8 +3,8 @@
 # Form implementation generated from reading ui file 'randomizer_window.ui',
 # licensing of 'randomizer_window.ui' applies.
 #
-# Created: Sun Jun 16 12:17:21 2019
-#      by: pyside2-uic  running on PySide2 5.11.2
+# Created: Thu Jul  4 20:03:21 2019
+#      by: pyside2-uic  running on PySide2 5.12.0
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -262,7 +262,7 @@ class Ui_MainWindow(object):
         self.disable_tingle_chests_with_tingle_bombs = QtWidgets.QCheckBox(self.groupBox_2)
         self.disable_tingle_chests_with_tingle_bombs.setObjectName("disable_tingle_chests_with_tingle_bombs")
         self.gridLayout_4.addWidget(self.disable_tingle_chests_with_tingle_bombs, 2, 1, 1, 1)
-        self.verticalLayout_2.addWidget(self.groupBox_2)
+        self.gridLayout_7.addWidget(self.groupBox_2, 3, 0, 1, 1)
         self.tabWidget.addTab(self.tab, "")
         self.tab_3 = QtWidgets.QWidget()
         self.tab_3.setEnabled(True)
