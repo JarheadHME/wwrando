@@ -123,6 +123,12 @@ class WWRandomizerWindow(QMainWindow):
     else:
       self.ui.update_checker_label.setText("(Running from source, skipping release update check.)")
   
+  def get_options(self):
+    options = OrderedDict()
+    for option_name in OPTIONS:
+      options[option_name] = self.get_option_value(option_name)
+    return options
+  
   def generate_seed(self):
     random.seed(None)
     
@@ -208,9 +214,7 @@ class WWRandomizerWindow(QMainWindow):
     self.ui.seed.setText(seed)
     self.update_settings()
     
-    options = OrderedDict()
-    for option_name in OPTIONS:
-      options[option_name] = self.get_option_value(option_name)
+    options = self.get_options()
     options["custom_colors"] = self.custom_colors
     
     permalink = self.ui.permalink.text()
@@ -385,10 +389,7 @@ class WWRandomizerWindow(QMainWindow):
     self.update_total_progress_locations()
   
   def update_total_progress_locations(self):
-    options = OrderedDict()
-    for option_name in OPTIONS:
-      options[option_name] = self.get_option_value(option_name)
-    num_progress_locations = Logic.get_num_progression_locations_static(self.cached_item_locations, options)
+    num_progress_locations = Logic.get_num_progression_locations_static(self.cached_item_locations, self.get_options())
     
     text = "Where Should Progress Items Appear? (Selected: %d Possible Progression Locations)" % num_progress_locations
     self.ui.groupBox.setTitle(text)
