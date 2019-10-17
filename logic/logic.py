@@ -451,12 +451,15 @@ class Logic:
     return False
   
   def filter_locations_for_progression(self, locations_to_filter, filter_sunken_treasure=False):
-    return Logic.filter_locations_for_progression_static(
+    progress_locations = Logic.filter_locations_for_progression_static(
       locations_to_filter,
       self.item_locations,
       self.rando.options,
       filter_sunken_treasure=filter_sunken_treasure
     )
+    removed_locations = self.rando.options.get("inactive_locations")
+    progress_locations = [loc for loc in progress_locations if loc not in removed_locations]
+    return progress_locations
   
   @staticmethod
   def filter_locations_for_progression_static(locations_to_filter, item_locations, options, filter_sunken_treasure=False):
