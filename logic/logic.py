@@ -215,6 +215,7 @@ class Logic:
       filter_sunken_treasure=True
     )
     num_progress_locations = len(progress_locations)
+    num_progress_locations -= len(options["inactive_locations"])
     if options.get("progression_triforce_charts"):
       num_progress_locations += 8
     if options.get("progression_treasure_charts"):
