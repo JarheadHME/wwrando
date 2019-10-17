@@ -500,7 +500,7 @@ class WWRandomizerWindow(QMainWindow):
         locations = Logic.filter_locations_for_progression_static(
           self.cached_item_locations.keys(),
           self.cached_item_locations,
-          self.settings,
+          self.get_options(),
           filter_sunken_treasure=True
         ) 
         inactive = self.get_option_value("inactive_locations")
@@ -579,7 +579,7 @@ class WWRandomizerWindow(QMainWindow):
         locations = Logic.filter_locations_for_progression_static(
           self.cached_item_locations.keys(),
           self.cached_item_locations,
-          self.get_options(), #self.settings hasn't been updated yet
+          self.get_options(),
           filter_sunken_treasure=True
         ) 
         self.active_locations_model.setStringList(locations)
