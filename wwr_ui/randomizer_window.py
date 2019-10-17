@@ -496,6 +496,22 @@ class WWRandomizerWindow(QMainWindow):
           # No Progressive Sword and there's no more than
           # 3 of any other Progressive item so two bits per item
           bitswriter.write(value.count(item), 2)
+      elif widget == self.ui.active_locations:
+        locations = Logic.filter_locations_for_progression_static(
+          self.cached_item_locations.keys(),
+          self.cached_item_locations,
+          self.settings,
+          filter_sunken_treasure=True
+        ) 
+        inactive = self.get_option_value("inactive_locations")
+        binary_string = ""
+        for location in locations:
+          if location in inactive:
+            binary_string += "1"
+          else:
+            binary_string += "0"
+        intRep = int(binary_string, 2)
+        bitswriter.write(intRep, intRep.bit_length())
     
     bitswriter.flush()
     
@@ -559,6 +575,29 @@ class WWRandomizerWindow(QMainWindow):
             self.append_row(self.starting_gear_model, item)
           for i in range(randamount):
             self.append_row(self.randomized_gear_model, item)
+      elif widget == self.ui.active_locations:
+        locations = Logic.filter_locations_for_progression_static(
+          self.cached_item_locations.keys(),
+          self.cached_item_locations,
+          self.get_options(), #self.settings hasn't been updated yet
+          filter_sunken_treasure=True
+        ) 
+        self.active_locations_model.setStringList(locations)
+        self.inactive_locations_model.setStringList([])
+        bit_string = ""
+        try:
+          for i in range(250): #read until the end of the bits
+            bit_string = str(bitsreader.read(1)) + bit_string
+        except IndexError as e:
+          pass
+          
+        bit_string = bit_string.lstrip("0").zfill(len(locations))
+        #trim off excess leading 0s (sometimes it goes past what's supposed to be the limit resulting in desyncing the lists)
+        #then pad them back to the proper length
+        for i in range(len(locations)):
+          if bit_string[i] is "1":
+            self.ui.active_locations.selectionModel().select(self.active_locations_model.index(i), QItemSelectionModel.Select)
+        self.move_selected_rows(self.ui.active_locations, self.ui.inactive_locations)
     
     self.update_settings()
   
