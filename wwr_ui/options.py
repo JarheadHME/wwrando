@@ -174,6 +174,14 @@ OPTIONS = OrderedDict([
     "starting_gear",
     "Items that will be in Link's inventory at the start of a new game."
   ),
+  (
+    "active_locations",
+    "All locations currently available for progression items to show up in, as based on the options selected in the \"Randomizer Settings\" tab."
+  ),
+  (
+    "inactive_locations",
+    "Locations that have been selected to not have progression items show up in, as based on the Active Locations list."
+  ),
 ])
 
 NON_PERMALINK_OPTIONS = [
@@ -181,4 +189,5 @@ NON_PERMALINK_OPTIONS = [
   "custom_player_model",
   "player_in_casual_clothes",
   "disable_custom_player_voice",
+  "inactive_locations",
 ]

@@ -60,9 +60,28 @@ class WWRandomizerWindow(QMainWindow):
     self.starting_gear_model = QStringListModel()
     self.ui.starting_gear.setModel(self.starting_gear_model)
     
-    self.preserve_default_settings()
+    self.ui.remove_location.clicked.connect(self.remove_location)
+    self.ui.add_location.clicked.connect(self.add_location)
     
     self.cached_item_locations = Logic.load_and_parse_item_locations()
+    
+    self.active_locations_model = QStringListModel()
+    self.ui.active_locations.setModel(self.active_locations_model)
+    self.active_locations_model.setStringList(
+      list(
+        Logic.filter_locations_for_progression_static(
+          self.cached_item_locations.keys(),
+          self.cached_item_locations,
+          self.get_options(),
+          filter_sunken_treasure=True
+        )
+      )
+    )
+    
+    self.inactive_locations_model = QStringListModel()
+    self.ui.inactive_locations.setModel(self.inactive_locations_model)
+    
+    self.preserve_default_settings()
     
     self.load_settings()
     
@@ -186,6 +205,16 @@ class WWRandomizerWindow(QMainWindow):
   def remove_from_starting_gear(self):
     self.move_selected_rows(self.ui.starting_gear, self.ui.randomized_gear)
     self.ui.randomized_gear.model().sourceModel().sort(0)
+    self.update_settings()
+  
+  def remove_location(self):
+    self.move_selected_rows(self.ui.active_locations, self.ui.inactive_locations)
+    self.ui.inactive_locations.model().sort(0)
+    self.update_settings()
+  
+  def add_location(self):
+    self.move_selected_rows(self.ui.inactive_locations, self.ui.active_locations)
+    self.ui.active_locations.model().sort(0)
     self.update_settings()
   
   def randomize(self):
