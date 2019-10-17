@@ -217,6 +217,26 @@ class WWRandomizerWindow(QMainWindow):
     self.ui.active_locations.model().sort(0)
     self.update_settings()
   
+  def check_location_lists(self):
+    locations = list(Logic.filter_locations_for_progression_static( # make it a list so it can be sorted
+      self.cached_item_locations.keys(),
+      self.cached_item_locations,
+      self.get_options(),
+      filter_sunken_treasure=True
+    ))
+    inactive_locations = self.get_option_value("inactive_locations")
+    cached_inactive_locations = inactive_locations.copy()
+    for i in cached_inactive_locations:
+      if i in locations:
+        locations.remove(i)
+      else:
+        inactive_locations.remove(i)
+    locations.sort()
+    inactive_locations.sort()
+
+    self.active_locations_model.setStringList(locations)
+    self.inactive_locations_model.setStringList(inactive_locations)
+  
   def randomize(self):
     clean_iso_path = self.settings["clean_iso_path"].strip()
     output_folder = self.settings["output_folder"].strip()
@@ -828,6 +848,8 @@ class WWRandomizerWindow(QMainWindow):
     if not compare(all_gear, INVENTORY_ITEMS):
       for opt in ["randomized_gear", "starting_gear"]:
         self.set_option_value(opt, self.default_settings[opt])
+    
+    self.check_location_lists()
     
     for option_name in OPTIONS:
       widget = getattr(self.ui, option_name)
