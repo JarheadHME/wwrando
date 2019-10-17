@@ -462,13 +462,14 @@ class Logic:
     return progress_locations
   
   @staticmethod
-  def filter_locations_for_progression_static(locations_to_filter, item_locations, options, filter_sunken_treasure=False):
+  def filter_locations_for_progression_static(locations_to_filter, item_locations, options, filter_sunken_treasure=False, filter_dungeons=False):
     filtered_locations = []
     for location_name in locations_to_filter:
       types = item_locations[location_name]["Types"]
       if "No progression" in types:
         continue
-      if "Dungeon" in types and not options.get("progression_dungeons"):
+      if "Dungeon" in types and (not options.get("progression_dungeons") or filter_dungeons): 
+        # filter_dungeons is for the in/active locations lists, making certain dungeon locations non-progress caused some issues
         continue
       if "Tingle Chest" in types and not options.get("progression_tingle_chests"):
         continue

@@ -73,7 +73,8 @@ class WWRandomizerWindow(QMainWindow):
           self.cached_item_locations.keys(),
           self.cached_item_locations,
           self.get_options(),
-          filter_sunken_treasure=True
+          filter_sunken_treasure=True,
+          filter_dungeons=True
         )
       )
     )
@@ -222,7 +223,8 @@ class WWRandomizerWindow(QMainWindow):
       self.cached_item_locations.keys(),
       self.cached_item_locations,
       self.get_options(),
-      filter_sunken_treasure=True
+      filter_sunken_treasure=True,
+      filter_dungeons=True
     ))
     inactive_locations = self.get_option_value("inactive_locations")
     cached_inactive_locations = inactive_locations.copy()
@@ -233,7 +235,7 @@ class WWRandomizerWindow(QMainWindow):
         inactive_locations.remove(i)
     locations.sort()
     inactive_locations.sort()
-
+    
     self.active_locations_model.setStringList(locations)
     self.inactive_locations_model.setStringList(inactive_locations)
   
@@ -501,7 +503,8 @@ class WWRandomizerWindow(QMainWindow):
           self.cached_item_locations.keys(),
           self.cached_item_locations,
           self.get_options(),
-          filter_sunken_treasure=True
+          filter_sunken_treasure=True,
+          filter_dungeons=True
         ) 
         inactive = self.get_option_value("inactive_locations")
         binary_string = ""
@@ -580,7 +583,8 @@ class WWRandomizerWindow(QMainWindow):
           self.cached_item_locations.keys(),
           self.cached_item_locations,
           self.get_options(),
-          filter_sunken_treasure=True
+          filter_sunken_treasure=True,
+          filter_dungeons=True
         ) 
         self.active_locations_model.setStringList(locations)
         self.inactive_locations_model.setStringList([])
